@@ -85,7 +85,11 @@ protected:
 	// called for dash
 	void Dash(const FInputActionValue& Value);
 
-	FVector Dash_Offset = FVector(300.0f, 0.0f, 000.0f);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dash")
+	float Dash_Offset = 1000.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Super Jump")
+	float SuperJumpPower = 100.0f;
 
 protected:
 	// APawn interface

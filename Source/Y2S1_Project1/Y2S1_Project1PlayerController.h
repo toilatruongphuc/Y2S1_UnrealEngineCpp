@@ -18,6 +18,7 @@ class Y2S1_PROJECT1_API AY2S1_Project1PlayerController : public APlayerControlle
 	
 protected:
 
+	
 	/** Input Mapping Context to be used for player input */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputMappingContext* InputMappingContext;

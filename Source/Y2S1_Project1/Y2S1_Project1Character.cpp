@@ -79,7 +79,7 @@ void AY2S1_Project1Character::SetupPlayerInputComponent(UInputComponent* PlayerI
 		 EnhancedInputComponent->BindAction(ChargedJumpAction, ETriggerEvent::Started, this, &AY2S1_Project1Character::SuperJump);
 
 		//Dash
-		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Started, this, &AY2S1_Project1Character::Dash);
+		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Triggered, this, &AY2S1_Project1Character::Dash);
 	}
 	else
 	{
@@ -90,6 +90,7 @@ void AY2S1_Project1Character::SetupPlayerInputComponent(UInputComponent* PlayerI
 
 void AY2S1_Project1Character::Move(const FInputActionValue& Value)
 {
+
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
@@ -120,13 +121,18 @@ void AY2S1_Project1Character::SuperJump(const FInputActionValue& Value)
 
 	if (Controller != nullptr)
 	{
+		
 		//add movement
 	}
 }
 void AY2S1_Project1Character::Dash(const FInputActionValue& Value)
 {
-	SetActorLocation(GetActorLocation() + Dash_Offset);
-	
+	UE_LOG(LogTemp, Warning, TEXT("DASH Triggered"));
+	if (Controller != nullptr)
+	{
+		// SetActorLocation(GetActorLocation() * Dash_Offset);
+		LaunchCharacter(GetActorForwardVector() * Dash_Offset, true, true);
+	}
 }
 
 
