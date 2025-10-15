@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "FirstInterface.h"
 #include "Y2S1_Project1Character.generated.h"
 
 class UInputComponent;
@@ -17,7 +18,7 @@ struct FInputActionValue;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class AY2S1_Project1Character : public ACharacter
+class AY2S1_Project1Character : public ACharacter, public IFirstInterface
 {
 	GENERATED_BODY()
 
@@ -50,6 +51,7 @@ class AY2S1_Project1Character : public ACharacter
 	UInputAction* DashAction;
 public:
 	AY2S1_Project1Character();
+	virtual void Interaction_Implementation() override;
 
 protected:
 	virtual void BeginPlay();
@@ -71,6 +73,7 @@ public:
 	/** Getter for the bool */
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	bool GetHasRifle();
+	// void Tick(float DeltaTime);
 
 protected:
 	/** Called for movement input */
@@ -86,10 +89,10 @@ protected:
 	void Dash(const FInputActionValue& Value);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dash")
-	float Dash_Offset = 1000.0f;
+	float Dash_Offset = 0.0f; //set in ue5
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Super Jump")
-	float SuperJumpPower = 100.0f;
+	float SuperJumpPower = 0.0f; //set in ue5
 
 protected:
 	// APawn interface

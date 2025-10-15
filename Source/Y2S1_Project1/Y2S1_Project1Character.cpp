@@ -76,7 +76,7 @@ void AY2S1_Project1Character::SetupPlayerInputComponent(UInputComponent* PlayerI
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AY2S1_Project1Character::Look);
 
 		//Chardged Jump
-		 EnhancedInputComponent->BindAction(ChargedJumpAction, ETriggerEvent::Started, this, &AY2S1_Project1Character::SuperJump);
+		 EnhancedInputComponent->BindAction(ChargedJumpAction, ETriggerEvent::Triggered, this, &AY2S1_Project1Character::SuperJump);
 
 		//Dash
 		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Triggered, this, &AY2S1_Project1Character::Dash);
@@ -116,12 +116,12 @@ void AY2S1_Project1Character::Look(const FInputActionValue& Value)
 }
 void AY2S1_Project1Character::SuperJump(const FInputActionValue& Value)
 {
-	//Vector 3d, preparing to take in vector Z
+	
 	
 
 	if (Controller != nullptr)
 	{
-		
+		LaunchCharacter(GetActorUpVector() * SuperJumpPower, false, true);
 		//add movement
 	}
 }
@@ -131,7 +131,7 @@ void AY2S1_Project1Character::Dash(const FInputActionValue& Value)
 	if (Controller != nullptr)
 	{
 		// SetActorLocation(GetActorLocation() * Dash_Offset);
-		LaunchCharacter(GetActorForwardVector() * Dash_Offset, true, true);
+		LaunchCharacter(GetActorForwardVector() * Dash_Offset, true, false);
 	}
 }
 
@@ -145,3 +145,6 @@ bool AY2S1_Project1Character::GetHasRifle()
 {
 	return bHasRifle;
 }
+
+
+
