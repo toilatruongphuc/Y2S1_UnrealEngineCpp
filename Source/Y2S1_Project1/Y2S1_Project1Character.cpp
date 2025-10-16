@@ -116,8 +116,7 @@ void AY2S1_Project1Character::Look(const FInputActionValue& Value)
 }
 void AY2S1_Project1Character::SuperJump(const FInputActionValue& Value)
 {
-	
-	
+	UE_LOG(LogTemp, Warning, TEXT("DASH Triggered"))
 
 	if (Controller != nullptr)
 	{

@@ -22,8 +22,8 @@ class Y2S1_PROJECT1_API IFirstInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category = "First Interface")
-	void Interaction();
+	//UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category = "First Interface")
+	// void Interaction();	
 	
 };
 

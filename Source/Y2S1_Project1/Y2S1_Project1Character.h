@@ -51,7 +51,7 @@ class AY2S1_Project1Character : public ACharacter, public IFirstInterface
 	UInputAction* DashAction;
 public:
 	AY2S1_Project1Character();
-	virtual void Interaction_Implementation() override;
+//	virtual void Interaction_Implementation() override;
 
 protected:
 	virtual void BeginPlay();
