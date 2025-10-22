@@ -24,6 +24,7 @@ class Y2S1_PROJECT1_API IFirstInterface
 public:
 	//UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category = "First Interface")
 	// void Interaction();	
-	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Pickup(AActor* PickerUp);
 };
 

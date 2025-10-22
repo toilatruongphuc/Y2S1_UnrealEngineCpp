@@ -9,7 +9,9 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "TP_PickUpComponent.h"
 #include "Engine/LocalPlayer.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -144,6 +146,17 @@ bool AY2S1_Project1Character::GetHasRifle()
 {
 	return bHasRifle;
 }
+void AY2S1_Project1Character::NotifyActorBeginOverlap(AActor* otherActor)
+{
+	Super::NotifyActorBeginOverlap(otherActor);
+	if (UKismetSystemLibrary::DoesImplementInterface(otherActor, UFirstInterface::StaticClass()))
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("Executed"));
+		IFirstInterface::Execute_Pickup(otherActor, this);
+		
+	}
+}
+
 
 
 
