@@ -43,6 +43,7 @@ AY2S1_Project1Character::AY2S1_Project1Character()
 
 }
 
+
 void AY2S1_Project1Character::BeginPlay()
 {
 	// Call the base class  
@@ -56,7 +57,7 @@ void AY2S1_Project1Character::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
-
+	// OnTakeAnyDamage.AddDynamic(this, &AY2S1_Project1Character::HandleAnyDamage);
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
@@ -156,6 +157,8 @@ void AY2S1_Project1Character::NotifyActorBeginOverlap(AActor* otherActor)
 		
 	}
 }
+
+
 
 
 

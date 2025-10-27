@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "pickupActor.h"
 #include "GameFramework/GameModeBase.h"
 #include "MyPickUpGameMode.generated.h"
 
@@ -17,7 +18,10 @@ class Y2S1_PROJECT1_API AMyPickUpGameMode : public AGameModeBase
 public:
 	virtual void BeginPlay() override;
 	
-	protected:
+protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PickUp")
-	AFirstPickUp* PickupActor;
+	ApickupActor* PickupActor;
+
+	UFUNCTION()
+	void GivePlayerScore(int score, AActor* PickerUp);
 };

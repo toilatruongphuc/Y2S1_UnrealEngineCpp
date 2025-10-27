@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "FirstInterface.h"
+#include "Kismet/GameplayStatics.h"
 #include "Y2S1_Project1Character.generated.h"
 
 class UInputComponent;
@@ -107,5 +108,8 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
+	// UFUNCTION()
+	// void HandleAnyDamage(AActor);
+	
 };
 

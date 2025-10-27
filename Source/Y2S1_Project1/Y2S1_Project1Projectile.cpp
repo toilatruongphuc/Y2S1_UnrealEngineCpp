@@ -3,6 +3,7 @@
 #include "Y2S1_Project1Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 AY2S1_Project1Projectile::AY2S1_Project1Projectile() 
 {
@@ -33,6 +34,7 @@ AY2S1_Project1Projectile::AY2S1_Project1Projectile()
 
 void AY2S1_Project1Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
+	UGameplayStatics::ApplyDamage(Hit.GetActor(), 10.0f, GetInstigatorController(), this->GetOwner(), nullptr);
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{

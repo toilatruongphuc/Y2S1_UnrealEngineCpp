@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "TestWidget.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "MyPlayerController.generated.h"
@@ -18,4 +19,10 @@ protected:
 	class UInputMappingContext* DefaultMappingContext;
 
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = UI)
+	TSubclassOf<UUserWidget> HUDWidgetClass;
+
+	UPROPERTY()
+	UTestWidget* CurrentWidget;
 };

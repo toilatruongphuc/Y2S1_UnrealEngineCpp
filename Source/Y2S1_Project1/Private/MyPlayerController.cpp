@@ -12,4 +12,14 @@ void AMyPlayerController::BeginPlay()
 	{
 		Subsystem->AddMappingContext(DefaultMappingContext, 0);
 	}
+
+	//Create new Widget
+	CurrentWidget = CreateWidget<UTestWidget, AMyPlayerController*>(this, HUDWidgetClass.Get());
+
+	// If the widget exists then add it to viewport
+	if (CurrentWidget != nullptr)
+	{
+		CurrentWidget->AddToViewport();
+	}
+	
 }
