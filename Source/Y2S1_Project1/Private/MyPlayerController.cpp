@@ -4,7 +4,6 @@
 #include "MyPlayerController.h"
 
 #include "EnhancedInputSubsystems.h"
-
 void AMyPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -14,12 +13,21 @@ void AMyPlayerController::BeginPlay()
 	}
 
 	//Create new Widget
-	CurrentWidget = CreateWidget<UTestWidget, AMyPlayerController*>(this, HUDWidgetClass.Get());
-
+	if (HUDWidgetClass != nullptr)
+	{
+		CurrentWidget = CreateWidget<UTestWidget, AMyPlayerController*>(this, HUDWidgetClass);
+	}
 	// If the widget exists then add it to viewport
 	if (CurrentWidget != nullptr)
 	{
 		CurrentWidget->AddToViewport();
 	}
-	
 }
+	void AMyPlayerController::AddScore(int amount)
+	{
+		_Score += amount;
+		if (CurrentWidget != nullptr)
+		{
+			CurrentWidget->();
+		}
+	}

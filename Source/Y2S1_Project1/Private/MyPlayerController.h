@@ -10,10 +10,13 @@
 /**
  * 
  */
+class UWidget_Score;
 UCLASS()
 class Y2S1_PROJECT1_API AMyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+public:
+	void AddScore(int amount);
 protected:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Input")
 	class UInputMappingContext* DefaultMappingContext;
@@ -25,4 +28,12 @@ protected:
 
 	UPROPERTY()
 	UTestWidget* CurrentWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = GameStats)
+	int _Score = 0;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UUserWidget> ScoreWidgetClass;
+
+	
 };
