@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MyPlayerController.h"
 #include "pickupActor.h"
 #include "GameFramework/GameModeBase.h"
 #include "MyPickUpGameMode.generated.h"
@@ -23,5 +24,7 @@ protected:
 	ApickupActor* PickupActor;
 
 	UFUNCTION()
-	void GivePlayerScore(int score, AActor* PickerUp);
+	void GivePlayerScore(int score, AMyPlayerController* PickerUp);
+
+	
 };

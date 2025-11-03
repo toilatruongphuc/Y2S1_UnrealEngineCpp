@@ -16,6 +16,7 @@ class Y2S1_PROJECT1_API AMyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 public:
+	int GetScore(){return _Score;};
 	void AddScore(int amount);
 protected:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Input")
@@ -24,16 +25,17 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = UI)
-	TSubclassOf<UUserWidget> HUDWidgetClass;
+	TSubclassOf<UWidget_Score> HUDWidgetClass;
 
 	UPROPERTY()
-	UTestWidget* CurrentWidget;
+	UWidget_Score* CurrentWidget;
 
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = GameStats)
 	int _Score = 0;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UUserWidget> ScoreWidgetClass;
+	TSubclassOf<UWidget_Score> ScoreWidgetClass;
 
 	
 };

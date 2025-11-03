@@ -3,6 +3,7 @@
 
 #include "MyPickUpGameMode.h"
 
+#include "MyPlayerController.h"
 #include "Kismet/GameplayStatics.h"
 
 void AMyPickUpGameMode::BeginPlay()
@@ -20,7 +21,16 @@ void AMyPickUpGameMode::BeginPlay()
 		UE_LOG(LogTemp, Display, TEXT("Test"));
 	}
 }
-void AMyPickUpGameMode::GivePlayerScore(int score, AActor* PickerUp)
+void AMyPickUpGameMode::GivePlayerScore(int score, AMyPlayerController* PickerUp)
 {
-	UE_LOG(LogTemp, Display, TEXT("Give %s: %d"), *PickerUp->GetName(), score);
+	if (AMyPlayerController* castedPC = Cast <AMyPlayerController>(PickerUp))
+	{
+		UE_LOG(LogTemp, Display, TEXT("Give %s: %d"), *PickerUp->GetName(), score);
+		castedPC->AddScore(score);
+	}
+	if (PickerUp->GetScore() >= 1000)
+	{
+		UE_LOG(LogTemp, Display, TEXT("You Won!"));
+	}
+	
 }

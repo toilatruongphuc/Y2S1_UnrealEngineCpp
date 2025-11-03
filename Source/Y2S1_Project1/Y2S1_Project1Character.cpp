@@ -153,7 +153,7 @@ void AY2S1_Project1Character::NotifyActorBeginOverlap(AActor* otherActor)
 	if (UKismetSystemLibrary::DoesImplementInterface(otherActor, UFirstInterface::StaticClass()))
 	{
 		//UE_LOG(LogTemp, Warning, TEXT("Executed"));
-		IFirstInterface::Execute_Pickup(otherActor, this);
+		IFirstInterface::Execute_Pickup(otherActor, Cast<AMyPlayerController>(this->GetController()));
 		
 	}
 }

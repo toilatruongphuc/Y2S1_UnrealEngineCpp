@@ -2,7 +2,8 @@
 
 
 #include "MyPlayerController.h"
-
+#include "Widget_Score.h"
+#include "TestWidget.h"
 #include "EnhancedInputSubsystems.h"
 void AMyPlayerController::BeginPlay()
 {
@@ -15,7 +16,7 @@ void AMyPlayerController::BeginPlay()
 	//Create new Widget
 	if (HUDWidgetClass != nullptr)
 	{
-		CurrentWidget = CreateWidget<UTestWidget, AMyPlayerController*>(this, HUDWidgetClass);
+		CurrentWidget = CreateWidget<UWidget_Score, AMyPlayerController*>(this, HUDWidgetClass);
 	}
 	// If the widget exists then add it to viewport
 	if (CurrentWidget != nullptr)
@@ -28,6 +29,7 @@ void AMyPlayerController::BeginPlay()
 		_Score += amount;
 		if (CurrentWidget != nullptr)
 		{
-			CurrentWidget->();
+			UE_LOG(LogTemp, Log, TEXT("Score: %d"), _Score);
+			CurrentWidget->UpdateScore(_Score);
 		}
 	}

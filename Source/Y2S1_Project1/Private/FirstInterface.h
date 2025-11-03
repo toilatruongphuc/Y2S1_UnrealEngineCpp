@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MyPlayerController.h"
 #include "UObject/Interface.h"
 #include "FirstInterface.generated.h"
 
@@ -25,6 +26,6 @@ public:
 	//UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category = "First Interface")
 	// void Interaction();	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Pickup(AActor* PickerUp);
+	void Pickup(AMyPlayerController* PickerUp);
 };
 

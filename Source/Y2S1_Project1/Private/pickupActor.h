@@ -4,11 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "FirstInterface.h"
+#include "MyPlayerController.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "pickupActor.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FpickupActorDelegate, int, PickupScore, AActor*, Pickerup );
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FpickupActorDelegate, int, PickupScore, AMyPlayerController*, Pickerup );
 UCLASS()
 class Y2S1_PROJECT1_API ApickupActor : public AActor, public IFirstInterface
 {
@@ -17,7 +18,7 @@ class Y2S1_PROJECT1_API ApickupActor : public AActor, public IFirstInterface
 public:
 	// Sets default values for this actor's properties
 	ApickupActor();
-	virtual void Pickup_Implementation(AActor* PickerUp) override;
+	virtual void Pickup_Implementation(AMyPlayerController* PickerUp) override;
 
 	
 	int GetPickUpScore()

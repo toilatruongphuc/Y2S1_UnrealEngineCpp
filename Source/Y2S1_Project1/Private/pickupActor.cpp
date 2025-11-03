@@ -29,7 +29,7 @@ void ApickupActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
-void ApickupActor::Pickup_Implementation(AActor* PickerUp)
+void ApickupActor::Pickup_Implementation(AMyPlayerController* PickerUp)
 {
 	PickUpDelegate.Broadcast(PickUpScore, PickerUp);
 	Destroy();

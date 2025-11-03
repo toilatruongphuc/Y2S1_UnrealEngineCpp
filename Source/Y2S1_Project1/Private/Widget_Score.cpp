@@ -11,13 +11,18 @@ void UWidget_Score::NativeConstruct()
 
 	if (ScoreText != nullptr)
 	{
-		ScoreText->SetText(FText::FromString("Score"));
+		ScoreText->SetText(FText::FromString("Score: 0"));
 	}
 }
 void UWidget_Score::UpdateScore(int score)
 {
-	if (ScoreText != nullptr)
+	if (ScoreText != nullptr && score < 1000)
 	{
-		
+		UE_LOG(LogTemp, Log, TEXT("Called"));
+		ScoreText->SetText(FText::FromString(FString::Printf(TEXT("Score: %d"), score)));
+	}
+	else
+	{
+		ScoreText->SetText(FText::FromString("Won!"));
 	}
 }
