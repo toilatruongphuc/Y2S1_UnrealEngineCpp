@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/ProgressBar.h"
 #include "Widget_Score.generated.h"
 /**
  * 
@@ -22,6 +23,7 @@ public:
 private:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UTextBlock> ScoreText;
-
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UProgressBar> HealthBar;
 	
 };

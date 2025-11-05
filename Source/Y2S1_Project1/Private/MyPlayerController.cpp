@@ -17,6 +17,7 @@ void AMyPlayerController::BeginPlay()
 	if (HUDWidgetClass != nullptr)
 	{
 		CurrentWidget = CreateWidget<UWidget_Score, AMyPlayerController*>(this, HUDWidgetClass);
+		HealthBar = CreateWidget<UWidget_Score, AMyPlayerController*>(this, HUDWidgetClass);
 	}
 	// If the widget exists then add it to viewport
 	if (CurrentWidget != nullptr)
@@ -33,3 +34,12 @@ void AMyPlayerController::BeginPlay()
 			CurrentWidget->UpdateScore(_Score);
 		}
 	}
+	void AMyPlayerController::GetHealthPercentage(float currentHealth, float maxHealth)
+{
+	if (CurrentWidget != nullptr)
+	{
+		float result = 0; 
+		result = (currentHealth / maxHealth) * 100;
+		_HealthPercentage = result;
+	}
+}

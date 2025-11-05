@@ -119,7 +119,7 @@ void AY2S1_Project1Character::Look(const FInputActionValue& Value)
 }
 void AY2S1_Project1Character::SuperJump(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemp, Warning, TEXT("DASH Triggered"))
+	UE_LOG(LogTemp, Warning, TEXT("SUPERJUMP Triggered"))
 
 	if (Controller != nullptr)
 	{
@@ -134,6 +134,7 @@ void AY2S1_Project1Character::Dash(const FInputActionValue& Value)
 	{
 		// SetActorLocation(GetActorLocation() * Dash_Offset);
 		LaunchCharacter(GetActorForwardVector() * Dash_Offset, true, false);
+		
 	}
 }
 
