@@ -43,6 +43,22 @@ AY2S1_Project1Character::AY2S1_Project1Character()
 
 }
 
+void AY2S1_Project1Character::Init_Implementation()
+{
+	// Call the base class  
+	Super::BeginPlay();
+
+	// Add Input Mapping Context
+	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		}
+	}
+	// OnTakeAnyDamage.AddDynamic(this, &AY2S1_Project1Character::HandleAnyDamage);
+}
+
 
 void AY2S1_Project1Character::BeginPlay()
 {

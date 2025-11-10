@@ -4,15 +4,18 @@
 
 #include "TestWidget.h"
 #include "CoreMinimal.h"
+#include "MatchStateHandler.h"
 #include "GameFramework/PlayerController.h"
+#include "Y2S1_Project1/TP_PickUpComponent.h"
 #include "MyPlayerController.generated.h"
 
 /**
  * 
  */
 class UWidget_Score;
-UCLASS()
-class Y2S1_PROJECT1_API AMyPlayerController : public APlayerController
+class UInputMappingContext;
+UCLASS(Abstract)
+class Y2S1_PROJECT1_API AMyPlayerController : public APlayerController, public IMatchStateHandler
 {
 	GENERATED_BODY()
 
@@ -22,13 +25,31 @@ class Y2S1_PROJECT1_API AMyPlayerController : public APlayerController
 	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess = "true"))
 	// UInputAction* IncreaseHealthAction;
 public:
+	AMyPlayerController();
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void Init();
+
+	virtual void Handle_MatchStarted_Implementation() override;
+	virtual void Handle_MatchEnded_Implementation() override;
+	
 	int GetScore(){return _Score;};
 	void AddScore(int amount);
 
 	void GetHealthPercentage(float currentHealth, float maxHealth);
+
 protected:
-	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Input")
-	class UInputMappingContext* DefaultMappingContext;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APawn> PawntoPawn;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input, meta=(AllowPrivateAccess = "true"))
+	TObjectPtr<UInputMappingContext> DefaultMappingContext;
+
+
+	// Old code when Init was not Made, if Init is failing and you want the old code, comment the code on top and ...
+	// ... de-comment this
+	// UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Input")
+	// class UInputMappingContext* DefaultMappingContext;
 
 	virtual void BeginPlay() override;
 //void DecreaseHealth(const FInputActionValue& Value);

@@ -53,7 +53,8 @@ class AY2S1_Project1Character : public ACharacter, public IFirstInterface
 public:
 	AY2S1_Project1Character();
 //	virtual void Interaction_Implementation() override;
-
+	UFUNCTION(BlueprintNativeEvent)
+	void Init();
 protected:
 	virtual void BeginPlay();
 

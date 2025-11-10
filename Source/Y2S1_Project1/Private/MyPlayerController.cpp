@@ -5,13 +5,44 @@
 #include "Widget_Score.h"
 #include "TestWidget.h"
 #include "EnhancedInputSubsystems.h"
-void AMyPlayerController::BeginPlay()
+#include "GameFramework/GameModeBase.h"
+
+AMyPlayerController::AMyPlayerController() : Super()
 {
-	Super::BeginPlay();
+	
+}
+
+void AMyPlayerController::Init_Implementation()
+{
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
 		Subsystem->AddMappingContext(DefaultMappingContext, 0);
 	}
+	// defensive coding
+	if (GetPawn() != nullptr)
+	{
+		GetPawn()->Destroy();
+	}
+}
+
+void AMyPlayerController::Handle_MatchStarted_Implementation()
+{
+	UWorld* const World = GetWorld();
+
+	AActor* tempStart = UGameplayStatics::GetGameMode(World)->FindPlayerStart(this);
+}
+
+void AMyPlayerController::Handle_MatchEnded_Implementation()
+{
+	IMatchStateHandler::Handle_MatchEnded_Implementation();
+}
+
+
+
+// Before Init lesson, if needed, uncomment this to make the code work again
+void AMyPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
 
 	//Create new Widget
 	if (HUDWidgetClass != nullptr)
