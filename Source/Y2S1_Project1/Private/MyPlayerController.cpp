@@ -7,7 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/GameModeBase.h"
 
-AMyPlayerController::AMyPlayerController() : Super()
+AMyPlayerController::AMyPlayerController()
 {
 	
 }
@@ -23,6 +23,17 @@ void AMyPlayerController::Init_Implementation()
 	{
 		GetPawn()->Destroy();
 	}
+	if (HUDWidgetClass != nullptr)
+	{
+		CurrentWidget = CreateWidget<UWidget_Score, AMyPlayerController*>(this, HUDWidgetClass);
+		HealthBar = CreateWidget<UWidget_Score, AMyPlayerController*>(this, HUDWidgetClass);
+	}
+	// If the widget exists then add it to viewport
+	if (CurrentWidget != nullptr)
+	{
+		CurrentWidget->AddToViewport();
+	}
+	
 }
 
 void AMyPlayerController::Handle_MatchStarted_Implementation()
@@ -30,11 +41,25 @@ void AMyPlayerController::Handle_MatchStarted_Implementation()
 	UWorld* const World = GetWorld();
 
 	AActor* tempStart = UGameplayStatics::GetGameMode(World)->FindPlayerStart(this);
+	FVector spawnLocation = tempStart != nullptr ? tempStart->GetActorLocation() : FVector::ZeroVector;
+	FRotator spawnRotation = tempStart != nullptr ? tempStart->GetActorRotation() : FRotator::ZeroRotator;
+	FActorSpawnParameters spawnParams;
+	spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+	APawn* tempPawn = World->SpawnActor<APawn>(PawntoPawn, spawnLocation, spawnRotation, spawnParams);
+	Possess(tempPawn);
+
+	if (AY2S1_Project1Character* castedPawn = Cast<AY2S1_Project1Character>(tempPawn))
+	{
+		//bind to any relevant events
+		castedPawn->Init();
+	}
+	
 }
 
 void AMyPlayerController::Handle_MatchEnded_Implementation()
 {
-	IMatchStateHandler::Handle_MatchEnded_Implementation();
+	
 }
 
 
@@ -56,7 +81,7 @@ void AMyPlayerController::BeginPlay()
 		CurrentWidget->AddToViewport();
 	}
 }
-	void AMyPlayerController::AddScore(int amount)
+void AMyPlayerController::AddScore(int amount)
 	{
 		_Score += amount;
 		if (CurrentWidget != nullptr)

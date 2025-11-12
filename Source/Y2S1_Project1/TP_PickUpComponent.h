@@ -4,12 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "Components/SphereComponent.h"
-#include "Y2S1_Project1Character.h"
+// #include "Y2S1_Project1Character.h"
 #include "TP_PickUpComponent.generated.h"
 
 // Declaration of the delegate that will be called when someone picks this up
 // The character picking this up is the parameter sent with the notification
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPickUp, AY2S1_Project1Character*, PickUpCharacter);
+
+class AY2S1_Project1Character;
 
 UCLASS(Blueprintable, BlueprintType, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class Y2S1_PROJECT1_API UTP_PickUpComponent : public USphereComponent

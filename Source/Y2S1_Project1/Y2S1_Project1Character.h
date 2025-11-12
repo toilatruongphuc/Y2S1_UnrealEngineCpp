@@ -56,7 +56,7 @@ public:
 	UFUNCTION(BlueprintNativeEvent)
 	void Init();
 protected:
-	virtual void BeginPlay();
+	//virtual void BeginPlay();
 
 public:
 		

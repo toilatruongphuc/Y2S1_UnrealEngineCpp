@@ -46,7 +46,7 @@ protected:
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
 
-	// Old code when Init was not Made, if Init is failing and you want the old code, comment the code on top and ...
+	// Old code when Init was not Made, if Init is failing && you want the old code, comment the code on top and ...
 	// ... de-comment this
 	// UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Input")
 	// class UInputMappingContext* DefaultMappingContext;

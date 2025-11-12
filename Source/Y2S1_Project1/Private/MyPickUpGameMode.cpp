@@ -3,8 +3,60 @@
 
 #include "MyPickUpGameMode.h"
 
-#include "MyPlayerController.h"
 #include "Kismet/GameplayStatics.h"
+
+AMyPickUpGameMode::AMyPickUpGameMode()
+{
+	
+}
+
+AActor* AMyPickUpGameMode::FindPlayerStart_Implementation(AController* Player, const FString& IncomingName)
+{
+	return Super::FindPlayerStart_Implementation(Player, IncomingName);
+}
+
+void AMyPickUpGameMode::PostLogin(APlayerController* NewPlayer)
+{
+	Super::PostLogin(NewPlayer);
+}
+
+void AMyPickUpGameMode::Logout(AController* Exiting)
+{
+	Super::Logout(Exiting);
+}
+
+void AMyPickUpGameMode::DecreaseCountDown()
+{
+}
+
+void AMyPickUpGameMode::HandleMatchIsWaitingToStart()
+{
+	Super::HandleMatchIsWaitingToStart();
+}
+
+void AMyPickUpGameMode::HandleMatchHasStarted()
+{
+	Super::HandleMatchHasStarted();
+}
+
+void AMyPickUpGameMode::HandleMatchHasEnded()
+{
+	Super::HandleMatchHasEnded();
+}
+
+void AMyPickUpGameMode::OnMatchSucceeded()
+{
+}
+
+bool AMyPickUpGameMode::ReadyToStartMatch_Implementation()
+{
+	return Super::ReadyToStartMatch_Implementation();
+}
+
+bool AMyPickUpGameMode::ReadyToEndMatch_Implementation()
+{
+	return Super::ReadyToEndMatch_Implementation();
+}
 
 void AMyPickUpGameMode::BeginPlay()
 {
