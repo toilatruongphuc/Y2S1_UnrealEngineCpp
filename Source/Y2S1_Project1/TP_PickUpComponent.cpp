@@ -2,9 +2,11 @@
 
 #include "TP_PickUpComponent.h"
 
+#include "Y2S1_Project1Character.h"
+
 UTP_PickUpComponent::UTP_PickUpComponent()
 {
-	// Setup the Sphere Collision
+	// Set up the Sphere Collision
 	SphereRadius = 32.f;
 }
 

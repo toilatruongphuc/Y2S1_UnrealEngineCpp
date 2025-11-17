@@ -11,7 +11,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Abstract)
 class Y2S1_PROJECT1_API AMyPickUpGameMode : public AGameMode
 {
 	GENERATED_BODY()
@@ -44,7 +44,7 @@ protected:
 	virtual void HandleMatchHasStarted() override;
 	virtual void HandleMatchHasEnded() override;
 
-	virtual void OnMatchSucceeded();
+	virtual void OnMatchStateSet() override;
 	
 	virtual bool ReadyToStartMatch_Implementation() override;
 	virtual bool ReadyToEndMatch_Implementation() override;
