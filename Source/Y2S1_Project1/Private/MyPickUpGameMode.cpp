@@ -27,7 +27,7 @@ AActor* AMyPickUpGameMode::FindPlayerStart_Implementation(AController* Player, c
 void AMyPickUpGameMode::PostLogin(APlayerController* NewPlayer)
 {
 	_PlayerControllers.AddUnique(NewPlayer);
-	if (AY2S1_Project1Character* castedPC = Cast<AY2S1_Project1Character>(NewPlayer))
+	if (AMyPlayerController* castedPC = Cast<AMyPlayerController>(NewPlayer))
 	{
 		castedPC->Init();
 	}
