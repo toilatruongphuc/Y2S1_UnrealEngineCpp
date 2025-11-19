@@ -75,7 +75,8 @@ void AMyPickUpGameMode::HandleMatchHasStarted()
 }
 
 void AMyPickUpGameMode::HandleMatchHasEnded()
-{for (AController* controller : _PlayerControllers)
+{
+	for (AController* controller : _PlayerControllers)
 {
 	//defensive coding
 	if (UKismetSystemLibrary::DoesImplementInterface(controller, UMatchStateHandler::StaticClass()))
@@ -138,6 +139,8 @@ void AMyPickUpGameMode::BeginPlay()
 		UE_LOG(LogTemp, Display, TEXT("Test"));
 	}
 }
+
+
 void AMyPickUpGameMode::GivePlayerScore(int score, AMyPlayerController* PickerUp)
 {
 	if (AMyPlayerController* castedPC = Cast <AMyPlayerController>(PickerUp))
@@ -145,9 +148,13 @@ void AMyPickUpGameMode::GivePlayerScore(int score, AMyPlayerController* PickerUp
 		UE_LOG(LogTemp, Display, TEXT("Give %s: %d"), *PickerUp->GetName(), score);
 		castedPC->AddScore(score);
 	}
-	if (PickerUp->GetScore() >= 1000)
+	if (PickerUp->GetScore() >= 200)
 	{
 		UE_LOG(LogTemp, Display, TEXT("You Won!"));
+		EndMatch();
 	}
 	
 }
+
+	
+

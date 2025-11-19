@@ -55,6 +55,5 @@ protected:
 
 	UFUNCTION()
 	void GivePlayerScore(int score, AMyPlayerController* PickerUp);
-
 	
 };

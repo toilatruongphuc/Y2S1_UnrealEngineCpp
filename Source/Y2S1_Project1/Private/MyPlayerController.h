@@ -36,7 +36,7 @@ public:
 	int GetScore(){return _Score;};
 	void AddScore(int amount);
 
-	void GetHealthPercentage(float currentHealth, float maxHealth);
+	//void GetHealthPercentage(float currentHealth, float maxHealth);
 
 protected:
 	UPROPERTY(EditAnywhere)
@@ -51,7 +51,7 @@ protected:
 	// UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Input")
 	// class UInputMappingContext* DefaultMappingContext;
 
-	virtual void BeginPlay() override;
+	//virtual void BeginPlay() override;
 //void DecreaseHealth(const FInputActionValue& Value);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = UI)

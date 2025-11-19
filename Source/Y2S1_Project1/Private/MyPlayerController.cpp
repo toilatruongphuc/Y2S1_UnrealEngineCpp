@@ -50,17 +50,20 @@ void AMyPlayerController::Handle_MatchStarted_Implementation()
 
 	APawn* tempPawn = World->SpawnActor<APawn>(PawntoPawn, spawnLocation, spawnRotation, spawnParams);
 	Possess(tempPawn);
-	UE_LOG(LogTemp, Warning, TEXT("possesed"));
 	if (AY2S1_Project1Character* castedPawn = Cast<AY2S1_Project1Character>(tempPawn))
 	{
 		//bind to any relevant events
 		castedPawn->Init();
 	}
-	
+	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+	{
+		Subsystem->AddMappingContext(DefaultMappingContext, 0);
+	}
 }
 
 void AMyPlayerController::Handle_MatchEnded_Implementation()
 {
+	SetInputMode(FInputModeUIOnly());
 	IMatchStateHandler::Handle_MatchEnded_Implementation();
 }
 
@@ -83,15 +86,15 @@ void AMyPlayerController::Handle_MatchEnded_Implementation()
 // 		CurrentWidget->AddToViewport();
 // 	}
 // }
-// void AMyPlayerController::AddScore(int amount)
-// 	{
-// 		_Score += amount;
-// 		if (CurrentWidget != nullptr)
-// 		{
-// 			UE_LOG(LogTemp, Log, TEXT("Score: %d"), _Score);
-// 			CurrentWidget->UpdateScore(_Score);
-// 		}
-// 	}
+void AMyPlayerController::AddScore(int amount)
+	{
+		_Score += amount;
+		if (CurrentWidget != nullptr)
+		{
+			UE_LOG(LogTemp, Log, TEXT("Score: %d"), _Score);
+			CurrentWidget->UpdateScore(_Score);
+		}
+	}
 // 	void AMyPlayerController::GetHealthPercentage(float currentHealth, float maxHealth)
 // {
 // 	if (CurrentWidget != nullptr)
