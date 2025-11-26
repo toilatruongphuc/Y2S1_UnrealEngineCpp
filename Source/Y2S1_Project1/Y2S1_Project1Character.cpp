@@ -12,6 +12,8 @@
 #include "TP_PickUpComponent.h"
 #include "Engine/LocalPlayer.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Sight.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -172,6 +174,15 @@ void AY2S1_Project1Character::NotifyActorBeginOverlap(AActor* otherActor)
 		//UE_LOG(LogTemp, Warning, TEXT("Executed"));
 		IFirstInterface::Execute_Pickup(otherActor, Cast<AMyPlayerController>(this->GetController()));
 		
+	}
+}
+void AY2S1_Project1Character::SetupStimulusSource()
+{
+	StimulusSource = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("Stimulus Source"));
+	if (StimulusSource != nullptr)
+	{
+		StimulusSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
+		StimulusSource->RegisterWithPerceptionSystem();
 	}
 }
 

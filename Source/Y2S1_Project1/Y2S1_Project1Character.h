@@ -55,10 +55,9 @@ public:
 //	virtual void Interaction_Implementation() override;
 	UFUNCTION(BlueprintNativeEvent)
 	void Init();
-protected:
+//protected:
 	//virtual void BeginPlay();
-
-public:
+	
 		
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -101,7 +100,7 @@ protected:
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 	// End of APawn interface
 
-	virtual void NotifyActorBeginOverlap(AActor* otherActor);
+	virtual void NotifyActorBeginOverlap(AActor* otherActor) override;
 
 public:
 	/** Returns Mesh1P subobject **/
@@ -111,6 +110,10 @@ public:
 
 	// UFUNCTION()
 	// void HandleAnyDamage(AActor);
-	
+
+private:
+	class UAIPerceptionStimuliSourceComponent* StimulusSource;
+
+	void SetupStimulusSource();
 };
 
