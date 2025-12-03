@@ -15,10 +15,10 @@ public:
 	// Sets default values for this actor's properties
 	APatrolPath();
 
+	FVector GetPatrolPoint(int const index) const;
+	int Num() const;
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI", meta=(MakeEditWidget="true", AllowPrivateAccess="true"))
 	TArray<FVector> PatrolPoints;
 
-	FVector GetPatrolPoint(int const index) const;
-	int Num() const;
 };

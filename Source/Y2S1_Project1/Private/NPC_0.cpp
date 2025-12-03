@@ -9,6 +9,8 @@ ANPC_0::ANPC_0()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	FirePoint2 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
+	FirePoint2-> SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -39,4 +41,15 @@ UBehaviorTree* ANPC_0::GetBehaviorTree() const
 APatrolPath* ANPC_0::GetPatrolPath() const
 {
 	return PatrolPath;
+}
+
+void ANPC_0::OnFire()
+{
+	FVector Location(FirePoint2->GetComponentLocation().X, FirePoint2->GetComponentLocation().Y, FirePoint2->GetComponentLocation().Z);
+	FRotator Rotation(FirePoint2->GetComponentRotation());
+	FActorSpawnParameters Params;
+	Params.Owner = this; // Set Owner if needed
+	Params.Instigator = GetInstigator();
+
+	AY2S1_Project1Projectile* tempProj = GetWorld()->SpawnActor<AY2S1_Project1Projectile>(Projectile, Location, Rotation, Params);
 }

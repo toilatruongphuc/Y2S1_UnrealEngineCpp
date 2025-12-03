@@ -7,7 +7,7 @@
 #include "NPC_0_AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
-UBTTask_FindPathPoint::UBTTask_FindPathPoint(FObjectInitializer const& ObjectInitializer)
+UBTTask_FindPathPoint::UBTTask_FindPathPoint(FObjectInitializer const& ObjectInitializer) : UBTTask_BlackboardBase{ObjectInitializer}
 {
 	NodeName = "Find Path Point";
 }
@@ -27,10 +27,17 @@ EBTNodeResult::Type UBTTask_FindPathPoint::ExecuteTask(UBehaviorTreeComponent& O
 			if (auto* npc = Cast<ANPC_0>(cont->GetPawn()))
 			{
 				//get the current patrol path vector from the NPC - this is local to the patrol path actor
-				auto const Path = npc->GetPatrolPath()->GetPatrolPoint(index);
+				auto const Point = npc->GetPatrolPath()->GetPatrolPoint(index);
+
+				//convert the local vecvtor to a global point
+				auto const GlobalPoint = npc->GetPatrolPath()->GetActorTransform().TransformPosition(Point);
+				bc->SetValueAsVector(PatrolPathVectorKey.SelectedKeyName, GlobalPoint);
+
+				//finish with success
+				FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+				return EBTNodeResult::Succeeded;
 			}
-			
 		}
 	}
-	return Super::ExecuteTask(OwnerComp, NodeMemory);
+	return EBTNodeResult::Failed;
 }

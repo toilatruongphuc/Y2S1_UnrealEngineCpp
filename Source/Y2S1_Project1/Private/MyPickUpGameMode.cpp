@@ -148,7 +148,7 @@ void AMyPickUpGameMode::GivePlayerScore(int score, AMyPlayerController* PickerUp
 		UE_LOG(LogTemp, Display, TEXT("Give %s: %d"), *PickerUp->GetName(), score);
 		castedPC->AddScore(score);
 	}
-	if (PickerUp->GetScore() >= 200)
+	if (PickerUp->GetScore() >= 1000)
 	{
 		UE_LOG(LogTemp, Display, TEXT("You Won!"));
 		EndMatch();

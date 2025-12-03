@@ -6,6 +6,7 @@
 #include "PatrolPath.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "GameFramework/Character.h"
+#include "Y2S1_Project1/Y2S1_Project1Projectile.h"
 #include "NPC_0.generated.h"
 
 UCLASS()
@@ -31,7 +32,16 @@ public:
 	UBehaviorTree* GetBehaviorTree() const;
 	
 	APatrolPath* GetPatrolPath() const;
+	UFUNCTION(BlueprintCallable)
+	void OnFire();
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI", meta = (AllowPrivateAccess = "true"))
 	APatrolPath* PatrolPath;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AY2S1_Project1Projectile> Projectile;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UStaticMeshComponent> FirePoint2;
+
 };
