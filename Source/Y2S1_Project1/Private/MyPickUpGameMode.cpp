@@ -2,6 +2,7 @@
 
 #include "MyPickUpGameMode.h"
 
+#include "Chaos/Deformable/ChaosDeformableSolverProxy.h"
 #include "GameFramework/PlayerStart.h"
 #include "Kismet/GameplayStatics.h"
 #include "Y2S1_Project1/Y2S1_Project1Character.h"
@@ -54,6 +55,21 @@ void AMyPickUpGameMode::DecreaseCountDown()
 		GetWorld()->GetTimerManager().SetTimer(_TimerDecreaseCountdown, this, &AMyPickUpGameMode::DecreaseCountDown, 1.f, false);		
 	}
 }
+void AMyPickUpGameMode::RestartMatchCountdown()
+{
+	_RestartMatchTimer--;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("%d"), _RestartMatchTimer));
+	if (_RestartMatchTimer <= 0)
+	{
+		UWorld* World = GetWorld();
+		FName CurrentLevelName = World->GetFName();
+		UGameplayStatics::OpenLevel(this, CurrentLevelName ,false );
+	}
+	else
+	{
+		GetWorld()->GetTimerManager().SetTimer(TimerDecreaseCountdownRestartMatch, this, &AMyPickUpGameMode::RestartMatchCountdown, 1.f, false);		
+	}
+}
 
 void AMyPickUpGameMode::HandleMatchIsWaitingToStart()
 {
@@ -81,7 +97,10 @@ void AMyPickUpGameMode::HandleMatchHasEnded()
 	//defensive coding
 	if (UKismetSystemLibrary::DoesImplementInterface(controller, UMatchStateHandler::StaticClass()))
 	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("You've WON!")));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Prepare to beat your own high score.")));
 		IMatchStateHandler::Execute_Handle_MatchEnded(controller);
+		RestartMatchCountdown();
 	}
 }
 	Super::HandleMatchHasEnded();
@@ -153,7 +172,6 @@ void AMyPickUpGameMode::GivePlayerScore(int score, AMyPlayerController* PickerUp
 		UE_LOG(LogTemp, Display, TEXT("You Won!"));
 		EndMatch();
 	}
-	
 }
 
 	

@@ -34,9 +34,16 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=MatchManagement)
 	int _CountdownTimer;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=MatchManagement)
+	int _RestartMatchTimer;
+	
 	FTimerHandle _TimerDecreaseCountdown;
 	UFUNCTION()
 	void DecreaseCountDown();
+
+	FTimerHandle TimerDecreaseCountdownRestartMatch;
+	UFUNCTION()
+	void RestartMatchCountdown();
 	
 	virtual void BeginPlay() override;
 
