@@ -59,6 +59,7 @@ void AMyPlayerController::Handle_MatchStarted_Implementation()
 	{
 		Subsystem->AddMappingContext(DefaultMappingContext, 0);
 	}
+	SetInputMode(FInputModeGameAndUI());
 }
 
 void AMyPlayerController::Handle_MatchEnded_Implementation()
